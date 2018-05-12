@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Welcome | {{ block.super }}{% endblock %}
+
+{% block content %}
+	{% if var %}
+		<p>W3Schools is a web developer's site.</p>
+		<p>Random Number is : {{num}}</p>
+		{% for item in some_list %}
+		{% if item|divisibleby:2 %}
+			This is even number: {{item}}<br/>
+		{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endblock %}
