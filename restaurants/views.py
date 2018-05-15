@@ -10,11 +10,11 @@ def home(request):
 	var = 'this is simples string'
 	return render(request, 'home.html', {'html_var':var,'num':num,'var': True, 'some_list':some_list})
 
-def about(request):
-	return render(request, 'about.html', {})
+# def about(request):
+# 	return render(request, 'about.html', {})
 
-def AboutTemplateView(TemplateView):
-	template_name = 'about.html'
+# class AboutTemplateView(TemplateView):
+# 	template_name = 'about.html'
 
 # def contact(request):
 # 	return render(request, 'contact.html', {})
