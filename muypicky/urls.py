@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib import admin
-from restaurants.views import home, ContactClassView #AboutTemplateView  contact, about
+from restaurants.views import home, ContactClassView, Retaurant_ListView #AboutTemplateView  contact, about
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -13,4 +13,6 @@ urlpatterns = [
 
     # url(r'^contact/$', contact),
     url(r'^contact/$', ContactClassView.as_view()),
+
+    url(r'^restaurant_list/$', Retaurant_ListView, name='restaurant_list'),
 ]
