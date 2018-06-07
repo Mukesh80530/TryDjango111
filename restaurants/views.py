@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from .forms import RestaurantLocationForm
 from django.utils import timezone
 
+
 def home(request):
     num = random.randint(0, 100000, )
     some_list = [random.randint(1, 100000), random.randint(1, 100000), random.randint(1, 10000)]
