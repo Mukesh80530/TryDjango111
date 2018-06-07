@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import random
 from django.views import View
 from .models import RestaurantLocation
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-
+from .forms import RestaurantLocationForm
+from django.utils import timezone
 
 def home(request):
     num = random.randint(0, 100000, )
@@ -40,3 +41,17 @@ def Retaurant_ListView(request):
     queryset = RestaurantLocation.objects.all()
     context = {'object_list': queryset}
     return render(request, 'restaurants_list.html', context)
+
+
+def CreateRestaurant(request):
+    if request.method == "POST":
+        form = RestaurantLocationForm(request.POST)
+        if form.is_valid():
+            model_instance = form.save(commit=False)
+            model_instance.timestamp = timezone.now()
+            model_instance.updated = timezone.now()
+            model_instance.save()
+            return redirect('/restaurants/list/')
+    else:
+        form = RestaurantLocationForm()
+    return render(request, "restaurant_add.html", {'form': form})
