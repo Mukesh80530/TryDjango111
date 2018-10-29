@@ -72,7 +72,6 @@ WSGI_APPLICATION = 'muypicky.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -125,6 +124,8 @@ USE_TZ = True
 
 # admin username = trydjango
 # admin password = manprax123
+#complete_time: 2:16
+#nextchapter: understanding queryset
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 

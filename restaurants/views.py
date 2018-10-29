@@ -5,38 +5,37 @@ from .models import RestaurantLocation
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 
+class homeView(TemplateView):
+    template_name = 'home.html'
 
-def home(request):
-    num = random.randint(0, 100000, )
-    some_list = [random.randint(1, 100000), random.randint(1, 100000), random.randint(1, 10000)]
-    var = 'this is simples string'
-    return render(request, 'home.html', {'html_var': var, 'num': num, 'var': True, 'some_list': some_list})
+    def get_context_data(self, *args, **kwargs):
+        context = super(homeView, self).get_context_data(*args, **kwargs)
+        num = None
+        some_list = [
+            random.randint(1, 100000), 
+            random.randint(1, 100000), 
+            random.randint(1, 10000)
+        ]
+        condition_bool_item = True
+        if condition_bool_item:
+            num = random.randint(0,100000)
+        context = {
+            'num':num,
+            'some_list':some_list
+        }
+        return context
 
+# class AboutView(TemplateView):
+#     template_name = 'about.html'
 
-# def about(request):
-# 	return render(request, 'about.html', {})
-
-# class AboutTemplateView(TemplateView):
-# 	template_name = 'about.html'
-
-# def contact(request):
-# 	return render(request, 'contact.html', {})
-
-class ContactClassView(View):
-    def get(self, request, *args, **kwargs):
-        context = {}
-        return render(request, 'contact.html', context)
-
-    # def post(self, request,*args, **kwargs):
-    # 	context = {}
-    # 	return render(request, 'contact.html', context)
-
-    # def put(self, request,*args, **kwargs):
-    # 	context = {}
-    # 	return render(request, 'contact.html', context)
-
+# class ContactView(TemplateView):
+#     template_name = 'contact.html'
 
 def Retaurant_ListView(request):
-    queryset =  RestaurantLocation.objects.all()
-    context = {'object_list':queryset}
-    return render(request, 'restaurants_list.html', context)
+    # import pdb;pdb.set_trace()
+    query_set = RestaurantLocation.objects.all()
+    template_name = 'restaurants_list.html'
+    context = {
+        'object_list':query_set
+    }
+    return render(request, template_name, context)
