@@ -608,6 +608,7 @@ __pycache__
 *.pyc
 ._pycache__
 *.vscode
+*.gitignore
 
 ### VisualStudio Patch ###
 # By default, sensitive information, such as encrypted password

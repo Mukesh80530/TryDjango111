@@ -2,8 +2,9 @@ from django.shortcuts import render
 import random
 from django.views import View
 from .models import RestaurantLocation
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.http import HttpResponse
+from django.db.models import Q
 
 class homeView(TemplateView):
     template_name = 'home.html'
@@ -32,10 +33,22 @@ class homeView(TemplateView):
 #     template_name = 'contact.html'
 
 def Retaurant_ListView(request):
-    # import pdb;pdb.set_trace()
     query_set = RestaurantLocation.objects.all()
     template_name = 'restaurants_list.html'
     context = {
         'object_list':query_set
     }
     return render(request, template_name, context)
+
+class SearchRestaurantListView(ListView):
+    template_name = 'restaurants_list.html'
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        if slug:
+            queryset = RestaurantLocation.objects.filter(
+                Q(category__iexact=slug) | 
+                Q(category__icontains=slug)
+            )
+        else:
+            queryset = RestaurantLocation.objects.none()
+        return queryset 
