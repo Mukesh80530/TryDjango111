@@ -1,36 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import random
 from django.views import View
 from .models import RestaurantLocation
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.http import HttpResponse
 from django.db.models import Q
-
-class homeView(TemplateView):
-    template_name = 'home.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(homeView, self).get_context_data(*args, **kwargs)
-        num = None
-        some_list = [
-            random.randint(1, 100000), 
-            random.randint(1, 100000), 
-            random.randint(1, 10000)
-        ]
-        condition_bool_item = True
-        if condition_bool_item:
-            num = random.randint(0,100000)
-        context = {
-            'num':num,
-            'some_list':some_list
-        }
-        return context
-
-# class AboutView(TemplateView):
-#     template_name = 'about.html'
-
-# class ContactView(TemplateView):
-#     template_name = 'contact.html'
 
 def Retaurant_ListView(request):
     query_set = RestaurantLocation.objects.all()
@@ -39,6 +13,17 @@ def Retaurant_ListView(request):
         'object_list':query_set
     }
     return render(request, template_name, context)
+
+class RestaurantDetailView(DetailView):
+    queryset = RestaurantLocation.objects.all()
+    template_name = 'restaurantlocation_detail.html'
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(RestaurantDetailView, self).get_context_data(*args, **kwargs)
+    #     return context
+    def get_object(self, *args, **kwargs):
+        rest_id = self.kwargs.get('rest_id')
+        obj =  get_object_or_404(RestaurantLocation, id=rest_id)
+        return obj
 
 class SearchRestaurantListView(ListView):
     template_name = 'restaurants_list.html'
@@ -50,5 +35,5 @@ class SearchRestaurantListView(ListView):
                 Q(category__icontains=slug)
             )
         else:
-            queryset = RestaurantLocation.objects.none()
+            queryset = RestaurantLocation.objects.all()
         return queryset 
