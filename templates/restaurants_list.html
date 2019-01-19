@@ -3,10 +3,14 @@
 
 {% block content %}
 <h3> Restaurant List </h3>
+
     {% if object_list %}
         <ul>
         {% for item in object_list %}
-           <li> {{ item.name }} |  {{ item.location }} |  {{ item.category }} |  {{ item.timestamp }} |  {{ item.updated }}</li>
+           <li> 
+               <a href="/restaurants/{{item.slug}}/">{{item}}</a><br/>
+               {{ item.name }} |  {{ item.location }} |  {{ item.category }} |  {{ item.timestamp }} |  {{ item.updated }}
+            </li>
         {% endfor %}
         </ul>
     {% endif %}

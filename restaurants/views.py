@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 import random
 from django.views import View
-from .models import RestaurantLocation
 from django.views.generic import TemplateView, ListView, DetailView
 from django.http import HttpResponse
 from django.db.models import Q
+
+from .models import RestaurantLocation
+from .forms import RestaurantCreateForm
 
 def Retaurant_ListView(request):
     query_set = RestaurantLocation.objects.all()
@@ -20,10 +22,11 @@ class RestaurantDetailView(DetailView):
     # def get_context_data(self, *args, **kwargs):
     #     context = super(RestaurantDetailView, self).get_context_data(*args, **kwargs)
     #     return context
-    def get_object(self, *args, **kwargs):
-        rest_id = self.kwargs.get('rest_id')
-        obj =  get_object_or_404(RestaurantLocation, id=rest_id)
-        return obj
+    
+    # def get_object(self, *args, **kwargs):
+    #     rest_id = self.kwargs.get('rest_id')
+    #     obj =  get_object_or_404(RestaurantLocation, id=rest_id)
+    #     return obj
 
 class SearchRestaurantListView(ListView):
     template_name = 'restaurants_list.html'
@@ -37,3 +40,9 @@ class SearchRestaurantListView(ListView):
         else:
             queryset = RestaurantLocation.objects.all()
         return queryset 
+
+def restaurant_createview(request):
+    import pdb; pdb.set_trace()
+    template_name = 'form.html'
+    context = {}
+    return render(request, template_name, context)
