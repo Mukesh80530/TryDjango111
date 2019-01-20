@@ -4,18 +4,17 @@ from restaurants.views import (
     Retaurant_ListView, 
     SearchRestaurantListView,
     RestaurantDetailView,
+    # restaurant_createview,
     restaurant_createview,
 )
-from django.views.generic import TemplateView
 
 urlpatterns = [
     # class based views
-    url(r'^restaurants/$', Retaurant_ListView, name='restaurants_list'),
-    url(r'^restaurants/(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view()),
-    url(r'^search/(?P<slug>\w+)/$', SearchRestaurantListView.as_view()),
-    url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
-    url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
+    url(r'^$', Retaurant_ListView, name='list'),
+    url(r'^(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view(), name='details'),
+    url(r'^create/$', restaurant_createview.as_view(), name='create'),
+    url(r'^search/(?P<slug>\w+)/$', SearchRestaurantListView.as_view(), name='search'),
 
     # function based views
-    url(r'^restaurants/create/$', restaurant_createview, name='restaurant_create')
+    # url(r'^create/$', restaurant_createview, name='restaurant_create')
 ]

@@ -124,9 +124,11 @@ USE_TZ = True
 
 # admin username = trydjango
 # admin password = manprax123
-# mission_completed: 3:12:08 (23)
+# mission_completed: 4:56:50 (33)
 #nextchapter: understanding queryset
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = '/login/'

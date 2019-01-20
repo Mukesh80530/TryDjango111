@@ -4,10 +4,11 @@
 {% block content %}
 <h1>Add Restaurant</h1>
 
-<form>
-    <input type="text" name="title" placeholder="Your Title"><br/>
-    <input type="text" name="location" placeholder="Your Location"><br/>
-    <input type="text" name="category" placeholder="Your Category"><br/>
+{% if form.errors.non_field_errors %}
+    {{form.errors.non_field_errors}}
+{% endif %}
+<form method="POST">{% csrf_token %}
+    {{form.as_p}}
     <button type="submit">Save</button>
 </form>
 {% endblock %}
