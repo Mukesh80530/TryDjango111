@@ -2,7 +2,7 @@
 {% block title %} Restaurant List | {{block.super}} {% endblock %}
 
 {% block content %}
-<h3> Restaurant List </h3>
+<h3> My Restaurant <small><a href="{% url 'restaurants:create' %}">Add</a></small></h3>
 
     {% if object_list %}
         <ul>
@@ -11,6 +11,8 @@
                <a href="{{ item.get_absolute_url }}">{{item}}</a><br/>
                {{ item.name }} |  {{ item.location }} |  {{ item.category }} |  {{ item.timestamp }} |  {{ item.updated }}
             </li>
+        {% empty %}
+            <li><a href="{% url 'restaurants:create' %}">Add One</a></li>
         {% endfor %}
         </ul>
     {% endif %}

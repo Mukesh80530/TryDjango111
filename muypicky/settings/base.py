@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurants',
+    'menus',
 ]
 
 MIDDLEWARE = [
@@ -124,8 +125,8 @@ USE_TZ = True
 
 # admin username = trydjango
 # admin password = manprax123
-# mission_completed: 4:56:50 (33)
-#nextchapter: understanding queryset
+# mission_completed: 5:53:36 (37)
+# nextchapter: understanding queryset
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
